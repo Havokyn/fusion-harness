@@ -12,7 +12,7 @@ const controllerPrompt = readFileSync(join(root, "prompts", "SYSTEM_PROMPT_AUTON
 describe("autonomous orchestration contracts", () => {
   test("registers both autonomous modes and persists structured run artifacts", () => {
     expect(command).toContain('registerCommand("fh-autonomous"');
-    expect(command).toContain('"once" | "until-done"');
+    expect(command).toContain('/^(once|until-done)\\s+');
     expect(command).toContain('path.join(autonomousRoot, "run.json")');
     expect(command).toContain('path.join(autonomousRoot, "goal.md")');
     expect(command).toContain('"observation.md"');
