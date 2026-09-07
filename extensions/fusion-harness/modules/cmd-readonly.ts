@@ -66,7 +66,7 @@ export function registerReadonlyCommands(pi: ExtensionAPI, h: HarnessDeps): void
 					await h.save(agentDir, "answer.md", runOk(run) ? run.text : `FAILED: ${runError(run)}`);
 				}));
 				if (stopper.stopped()) {
-					h.stoppedPanel("fh-opinion", runs, artifactsDir, startedAt, "All active opinions were stopped; completed source artifacts remain on disk.");
+					h.stoppedPanel("fh-opinion", runs, artifactsDir, startedAt, "All active opinions were stopped; completed answers remain on disk.");
 					return;
 				}
 				const ok = runs.every(runOk);
