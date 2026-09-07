@@ -11,6 +11,7 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+import { registerAutonomousCommand } from "./cmd-autonomous.ts";
 import { runChild } from "./child-runner.ts";
 import { orderedSlots } from "./model-stack.ts";
 import { debateClosingPrompt, debateOpeningPrompt, debateRebuttalPrompt, opinionPrompt } from "./prompt-library.ts";
@@ -31,6 +32,10 @@ function parseRounds(h: HarnessDeps, input: string, fallback = ROUNDS_DEFAULT): 
 }
 
 export function registerReadonlyCommands(pi: ExtensionAPI, h: HarnessDeps): void {
+	// Autonomous registration lives here to keep the extension factory's command-module
+	// seam unchanged; the controller itself is implemented in cmd-autonomous.ts.
+	registerAutonomousCommand(pi, h);
+
 	// ── /fh-opinion — N independent read-only opinions ─────
 	pi.registerCommand("fh-opinion", {
 		description: "Every configured agent answers independently with strict read-only tools; compare all concrete opinions.",
